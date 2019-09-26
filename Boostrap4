@@ -1,0 +1,57 @@
+col-3会在任何屏幕上显示3列宽度
+col-md-3，如果小于中屏幕，该元素仍然按照default的flow走，一旦大于等于中屏幕时，显示为3列宽度
+col-md会自动计算同辈元素的数量，并自动平均得出宽度
+可以混合, col-md col-md-8 col-md
+
+justify-content-md-center   or    justify-content-md-end
+
+cards可以用于持仓，股票池，粉丝列表等，其实可以看看
+
+py-5，在y-axis上添加5px， my-4，在y-axis上添加4px
+nav-pills其实就是背景填充
+使用data-toggle和href="#foo"的搭配可以调用boostrap自带的JavaScript
+
+在使用flex前添加d-flex可以确保使用align/justify等内容，但d-flex不是必须的
+flex-column flex-md-row是一道组合拳，意思时在小屏幕时父系按照column排列元素，在中屏幕及以上按照row排列元素
+
+<nav class="nav navbar navbar-toggleable-sm">
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#foo">  # 点击折叠该button
+    <span class="navbar-toggler-icon"></span>         # 这个是toggle之后的小icon
+    </button>
+    <a class="navbar-brand" href="#">Navbar</a>       # 缩进后brand显示于折叠纽的右边，如欲左边，则放到折叠纽的上面
+    <div class="collapse navbar-collapse" id="foo">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active"> 
+        .......
+        .......
+        .......
+      </div>
+    </div>
+</nav>
+class一览：
+  .nav ---  is built with flexbox and provide a strong foundation for building all types of navigation components.It includes some style 
+            overrides (for working with lists), some link padding for larger hit areas, and basic disabled styling.
+
+.navbar --- 为后续的toggle，collapse，navbar-brand等功能提供基础支持，不必深究了
+
+navbar-toggler --- are left-aligned by default, but should they follow a sibling element like a .navbar-brand, they’ll automatically be 
+                   aligned to the far right. Reversing your markup will reverse the placement of the toggler. Below are examples of 
+                   different toggle styles.
+                   
+                   
+<div class="pos-f-t">                   # 用折叠办法显示某部分div
+  <div class="collapse" id="navbarToggleExternalContent">
+    <div class="bg-dark p-4">
+      <h5 class="text-white h4">Collapsed content</h5>
+      <span class="text-muted">Toggleable via the navbar brand.</span>
+    </div>
+  </div>
+  <nav class="navbar navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+</div>           
+
+
+navbar-light改动后可以显示小屏幕下的下拉框并且不影响其他元素正常工作
