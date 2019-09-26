@@ -1,0 +1,30 @@
+弄了个最新的SCSS，其他的package安装时非要调用GBK，怎么都调不过来
+这个新的还不错，直接python manage.py sass static/chongtian/scss/main.scss static/chongtian/css/main.css就compile了
+添个python manage.py sass static/chongtian/scss/main.scss static/chongtian/css/main.css --watch就watch了
+
+
+follow convention，如果要使用partial引入别的SCSS，最好命名_foo.scss
+引用时，@import "foo";  不需要_，不需要后缀
+
+
+.panel{......}                  inheritance
+.little-panel{
+  @extend .panel;
+}
+
+
+@mixin .border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+引用时，类似extend， @include border-radius(5px);
+
+
+还可以使用operators
+.jumbo-button{
+  @extends .button
+  padding: $buttonPadding + 30;             对于SCSS来说，不需要specify px，不过硬要加也没问题
+  color: $buttonColor * 1.5;                brighter
+}
