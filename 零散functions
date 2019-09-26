@@ -1,0 +1,60 @@
+import pandas
+from bs4 import BeautifulSoup as soup
+from urllib.request import urlopen
+from os.path import join, dirname, abspath
+
+
+def import_index(request):
+    file_path = join(dirname(abspath(__file__)), 'sz.csv')
+    rows = pandas.read_csv(file_path, encoding='gbk', iterator=True)    # 自带的csv太恶心了，下载了pandas
+    raw_name = []
+    raw_code = []
+
+    for row in rows:        # enumerate()中还可以设置 start=1
+        raw_name = row['name'].values     # pandas本来是一个数据处理的package，为了csv好读取而采用，因此格式上各种坑
+        raw_code = row['code'].values     # pandas默认的是DataFrame格式，所以csv第一行要标出列的名称，方便选取，pandas本身是处理矩阵的
+
+    raw = zip(raw_name, raw_code)
+    for line in raw:
+        name = line[0]
+        code = str(line[1])
+        Stock.objects.get_or_create(name=name, code=code, region=False)
+
+    return render(request, 'trade/index.html')
+
+
+def crawl_stock(request):
+    url = 'http://quote.eastmoney.com/stock_list.html'
+    connection = urlopen(url)
+    html = connection.read()         # urlopen只是一个连接，具体的读写要具体
+    html = html.decode('gbk', 'ignore')
+
+    file_path = join(dirname(abspath(__file__)), 'sz.csv')
+    f = open(file_path, "w")
+
+    # html parsing, content.h1 will return an h1 header
+    content = soup(html, "html.parser")
+
+    # 该网页深证和上证数据都储存在sltit的class里，所以进行如下抓取
+    container = content.findAll('ul')
+    sh = container[7]           # 深证和上证分别储存于ul里
+    sz = container[8]
+    datas = sz.findAll('a')    # 如果想抓attributes，container.div.div.a.img["title"]
+    for data in datas:
+        line = data.text.replace("(", ",").replace(")", "")
+        f.write(line + "\n")
+    f.close()
+
+    connection.close()
+    return render(request, 'trade/index.html')
+
+
+def implement(request):
+    datas = Stock.objects.all()
+    for data in datas:
+        old_code = data.code
+        new_code = old_code.zfill(6)
+        data.code = new_code
+        data.save()
+
+    return render(request, 'trade/index.html')
