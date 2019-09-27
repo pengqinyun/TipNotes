@@ -43,3 +43,5 @@ get_queryset()自定义queryset
 get_context_data(**kwargs)可以自定义context，传到前端统一叫object_list
 
 {% for ... %} 后跟 {% empty %}，意思为如果for loop里面是空的，则显示empty中内容
+
+用as_view的时候需要封装login_required decorator，需要在url里面进行封装，不可直接使用@login_required
