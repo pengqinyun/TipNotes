@@ -56,3 +56,5 @@ computed:{
 实战tips：
 
 在Axios中不能直接调用this，需要先设一个var foo = this，后续所有this都用foo来指代（可能是axios协议的问题）
+
+基本的json格式是[{key:val, key:val, key:val},{},{},...]
