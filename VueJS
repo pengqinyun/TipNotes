@@ -53,10 +53,4 @@ computed:{
 所以整个逻辑是，先从后端传来blogs，然后前端针对this.blogs做定制操作，其实还是比较简单直白的
 
 
-实战tips：
 
-在Axios中不能直接调用this，需要先设一个var foo = this，后续所有this都用foo来指代（可能是axios协议的问题）
-
-基本的json格式是[{key:val, key:val, key:val},{},{},...]
-
-this调用父类时，可能会因为嵌套层次太深而出现调用不清的情况（譬如{}镶套太深了，其实调用的是祖父类，却使用了this），这种情况需要明确祖父类，即var foo=this
