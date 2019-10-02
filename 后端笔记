@@ -55,3 +55,8 @@ render(request,'...html', local())是一种简便写法，就是把所有context
 关于timezone:
 本座直接使用了django的timezone，即“按照用户所在时区返还用户当下的日期和时间”，这对于处理世界市场来说是django已经造好的轮子，不需要再担心白农们调夏令
 时冬令时，但同时可能带来的安全问题，后期要注意
+
+
+关于slug：
+思考再三，还是需要slug，用以显示个人页面（或者说用以以某一个账号访问别的账号的个人页面），但考虑到username可能是中文，所以下了uuslug插件，之后再进行
+请求时，务必记得先slugify(username)
