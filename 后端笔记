@@ -50,3 +50,7 @@ get_context_data(**kwargs)可以自定义context，传到前端统一叫object_l
 Local():
 render(request,'...html', local())是一种简便写法，就是把所有context以各自的variable name都传到视图里，然而有时候我们不需要把中间变量也传视图，所以
 使用前需谨慎考虑后续代码延展性
+
+
+关于timezone:
+我是直接使用了django的timezone的，即“按照用户所在时区返还用户当下的日期和时间”，这对于处理世界市场来说是django已经造好的轮子，不需要再担心白农们调夏令时冬令时，但同时可能带来的安全问题，后期要注意
