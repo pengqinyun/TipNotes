@@ -45,3 +45,8 @@ get_context_data(**kwargs)可以自定义context，传到前端统一叫object_l
 {% for ... %} 后跟 {% empty %}，意思为如果for loop里面是空的，则显示empty中内容
 
 用as_view的时候需要封装login_required decorator，需要在url里面进行封装，不可直接使用@login_required
+
+
+Local():
+render(request,'...html', local())是一种简便写法，就是把所有context以各自的variable name都传到视图里，然而有时候我们不需要把中间变量也传视图，所以
+使用前需谨慎考虑后续代码延展性
