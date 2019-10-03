@@ -65,3 +65,7 @@ render(request,'...html', local())是一种简便写法，就是把所有context
 
 关于日期：
 再holdings和money关系中都涉及到对日期的判断，所以本座自制了两个相关的property，前端templates中直接调用就好了
+
+
+关于form：
+一般的form直接写到forms.py就好了，这样django会自动加上cleaned_data方法，整个app也更organized，当然硬要在视图里强敲也不是不行
