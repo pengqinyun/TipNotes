@@ -65,6 +65,8 @@ render(request,'...html', local())是一种简便写法，就是把所有context
 
 关于日期：
 再holdings和money关系中都涉及到对日期的判断，所以本座自制了两个相关的property，前端templates中直接调用就好了
+datetime是一个很奇怪的library，首先import datetime就行，然而要调用现在的datetime，需要datetime.datetime.now()，然后调用timedelta又直接datetime.
+timedelta就可以，写的太他妈奇怪了
 
 
 关于form：
