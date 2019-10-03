@@ -61,3 +61,7 @@ render(request,'...html', local())是一种简便写法，就是把所有context
 思考再三，还是需要slug，用以显示个人页面（或者说用以以某一个账号访问别的账号的个人页面），但考虑到username可能是中文，所以下了uuslug插件，之后再进行
 请求时，务必记得先slugify(username)
 使用slug的主要考虑是，url中参数的传递和显示，很多时候需要浏览器的参与，当中文用户被英文浏览器搜索的时候，会有很多衍生问题，所以干脆一劳永逸了
+
+
+关于日期：
+再holdings和money关系中都涉及到对日期的判断，所以本座自制了两个相关的property，前端templates中直接调用就好了
