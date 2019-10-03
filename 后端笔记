@@ -1,3 +1,5 @@
+filter返还的是一个queryset，因为可能有好几个符合条件的对象，如果要精确定位某一个对象，用get_object_or_404
+
 pandas本是一个处理大数据的插件，有各种matrices方法可以调用，但素！因为django自带的Json解码在应对中文编码时简直是一坨屎，所以本座还是捏着鼻子用了pandas，
 至于xlrd还不错，可以直接用.原始录入的院校，省市信息，本座都存到了“冲天流程”这个文件夹中
 
@@ -65,8 +67,8 @@ render(request,'...html', local())是一种简便写法，就是把所有context
 
 关于日期：
 再holdings和money关系中都涉及到对日期的判断，所以本座自制了两个相关的property，前端templates中直接调用就好了
-datetime是一个很奇怪的library，首先import datetime就行，然而要调用现在的datetime，需要datetime.datetime.now()，然后调用timedelta又直接datetime.
-timedelta就可以，写的太他妈奇怪了
+datetime有很多种操作，譬如datetime.date.today()，datetime.year，本座用了datetime.datetime.now()和datetime.timedelta（hours=），注意import时候
+直接import datetime就好
 
 
 关于form：
