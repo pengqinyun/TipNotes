@@ -10,3 +10,17 @@ Javascript竟然是一个单线程处理语言....所以同步使用好几个Aja
 但是傻逼Axios就没有这么激灵了，于是机智如我只好在axios里面循环嵌套，所以对于股价的接入接口，一定要慎之又慎了，哎..
 
 v-model="foo[3].attr"这样写是完全可以的，但一定要保证return存在，否则javascript报错
+
+Django template也可以display各种form errors，假设使用了{{ form.as_p }}
+{{ form.non_field_errors }}可以显示non_field
+<ul class="errorlist nonfield">
+    <li>Generic validation error</li>
+</ul>
+前端显示会额外赋予nonfield class来做处理，但其实都是error，没那么必要
+
+{{ form.name_of_field.errors }} 可以具体显示某个field的error
+具体显示时，会以如下形式：
+<ul class="errorlist">
+    <li>Sender is required.</li>
+</ul>
+所以可以改errorlist的CSS来改前端
