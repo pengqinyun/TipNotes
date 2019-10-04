@@ -24,3 +24,4 @@ Django template也可以display各种form errors，假设使用了{{ form.as_p }
     <li>Sender is required.</li>
 </ul>
 所以可以改errorlist的CSS来改前端
+
