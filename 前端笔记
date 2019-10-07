@@ -26,3 +26,5 @@ Django template也可以display各种form errors，假设使用了{{ form.as_p }
 所以可以改errorlist的CSS来改前端
 
 资讯可以做成button，看起来还不错
+
+<script>中好像可以直接用global var foo = {{...}}来提取template variables
