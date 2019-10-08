@@ -88,3 +88,8 @@ friendship插件：
 
 Django-channel和chat系统：
 一开始的困惑在于asgiref，需要更新到最新版本，后续部署时这一点可能需要注意
+
+
+Django Channels:
+
+consumer的作用和views类似
