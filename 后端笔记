@@ -93,3 +93,5 @@ Django-channel和chat系统：
 Django Channels:
 
 consumer的作用和views类似
+Async请求时，基本都要加await，因为websocket协议中server会和很多thread交互，相互之间可能会有问题，最好都加上
+每一笔输入都是一个event，在server里我们需要知道每一个正在发生的event，所以要有一个东西来储存这些events，这就是Redis
