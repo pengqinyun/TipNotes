@@ -2,6 +2,10 @@
 
 Django Channels:
 
+Redis完全是一个异步接口，所以所有同步代码都需要做async_to_sync的相关处理
+Channel_layer中所有方法（send,group_send等)也都是异步方法，所以调取时也需要加上await等
+def是同步方法，async def是异步转同步方法
+
 consumer的作用和views类似
 Async请求时，基本都要加await，因为websocket协议中server会和很多thread交互，相互之间可能会有问题，最好都加上
 每一笔输入都是一个event，在server里我们需要知道每一个正在发生的event，所以要有一个东西来储存这些events，这就是Redis
