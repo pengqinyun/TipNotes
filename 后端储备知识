@@ -46,6 +46,8 @@ get_context_data(**kwargs)可以自定义context，传到前端统一叫object_l
 或者自定义 context_object_name = 'foo', 传到前端的就叫foo
 DetailView使用时传一个<pk>进url
 
+对于class_based_view来说，因为是一个class，django内置的decorator就无法使用了，解决方法是各种Mixin，类似LoginRequiredMixin，这是mixin存在的基础
+
 
 
 {% for ... %} 后跟 {% empty %}，意思为如果for loop里面是空的，则显示empty中内容
