@@ -54,39 +54,6 @@ render(request,'...html', local())是一种简便写法，就是把所有context
 使用前需谨慎考虑后续代码延展性
 
 
-关于timezone:
-本座直接使用了django的timezone，即“按照用户所在时区返还用户当下的日期和时间”，这对于处理世界市场来说是django已经造好的轮子，不需要再担心白农们调夏令
-时冬令时，但同时可能带来的安全问题，后期要注意
 
-
-关于slug：
-思考再三，还是需要slug，用以显示个人页面（或者说用以以某一个账号访问别的账号的个人页面），但考虑到username可能是中文，所以下了uuslug插件，之后再进行
-请求时，务必记得先slugify(username)
-使用slug的主要考虑是，
-1,url中参数的传递和显示，很多时候需要浏览器的参与，当中文用户被英文浏览器搜索的时候，会有很多衍生问题，所以干脆一劳永逸了
-2,url中传递的只能是string，不能是object，所以反正要在views里convert的，不如直接统一用slug，后续如果有直接读写该页面的需求也更好做
-
-
-关于日期：
-再holdings和money关系中都涉及到对日期的判断，所以本座自制了两个相关的property，前端templates中直接调用就好了
-datetime有很多种操作，譬如datetime.date.today()，datetime.year，本座用了datetime.datetime.now()和datetime.timedelta（hours=），注意import时候
-直接import datetime就好
-
-
-关于form：
-一般的form直接写到forms.py就好了，这样django会自动加上cleaned_data方法，整个app也更organized，当然硬要在视图里强敲也不是不行
-
-
-关于订阅subscribe:
-有订阅功能的个人页面在subscribe里面，本座设置了login_required，如果是给未登录用户看的个人页面，后期写在users里面算了，subscribe处理订阅逻辑，users
-处理浏览逻辑
-
-
-friendship插件：
-因为该package有request, reject等功能，所以“谁加了谁”当好友还有一个审批的过程，所以add的时候有两个方向，都要注意
-
-
-Django-channel和chat系统：
-一开始的困惑在于asgiref，需要更新到最新版本，后续部署时这一点可能需要注意
 
 
