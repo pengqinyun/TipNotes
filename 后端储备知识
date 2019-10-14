@@ -40,9 +40,13 @@ Generic View:
 
 是一个Django自带的一系列默认设定的view，可以customize
 
-listView会找寻一个default的app/modelname_list.html，除非specify template_name
+ListView会找寻一个default的app/modelname_list.html，除非specify template_name
 get_queryset()自定义queryset
-get_context_data(**kwargs)可以自定义context，传到前端统一叫object_list
+get_context_data(**kwargs)可以自定义context，传到前端统一叫object_list  
+或者自定义 context_object_name = 'foo', 传到前端的就叫foo
+DetailView使用时传一个<pk>进url
+
+
 
 {% for ... %} 后跟 {% empty %}，意思为如果for loop里面是空的，则显示empty中内容
 
