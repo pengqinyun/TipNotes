@@ -44,9 +44,13 @@ ListView会找寻一个default的app/modelname_list.html，除非specify templat
 get_queryset()自定义queryset
 get_context_data(**kwargs)可以自定义context，传到前端统一叫object_list  
 或者自定义 context_object_name = 'foo', 传到前端的就叫foo
+
 DetailView使用时传一个<pk>进url
+如果在detailview里specify了get_queryset，后续的get_object就会以该queryset为基础，在该queryset中寻找该object
 
 对于class_based_view来说，因为是一个class，django内置的decorator就无法使用了，解决方法是各种Mixin，类似LoginRequiredMixin，这是mixin存在的基础
+
+
 
 
 
@@ -59,6 +63,7 @@ Local():
 render(request,'...html', local())是一种简便写法，就是把所有context以各自的variable name都传到视图里，然而有时候我们不需要把中间变量也传视图，所以
 使用前需谨慎考虑后续代码延展性
 
+代码不光是自己敲，还要考虑到分工协作，所以models也好views也好，每一层都要尽量的把bug杜绝掉，哪怕是双重保险，三重保险，这种代码思路值得借鉴
 
 
 
