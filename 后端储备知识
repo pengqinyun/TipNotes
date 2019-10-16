@@ -49,9 +49,12 @@ DetailView使用时传一个<pk>进url
 如果在detailview里specify了get_queryset，后续的get_object就会以该queryset为基础，在该queryset中寻找该object
 
 对于class_based_view来说，因为是一个class，django内置的decorator就无法使用了，解决方法是各种Mixin，类似LoginRequiredMixin，这是mixin存在的基础
+其实对function based view来说，把代码敲得更organized，可读性一样很高，条理清晰，譬如template_name='foo',return render(template_name)
+而FBV可以以更少的学习成本更迅速的customize，突破各种应用场景
+所以结论是-------------------------除非repeat like crazy，否则不上CBV
 
 
-
+在model里定义get_absolute_url，前端调用，代码更dry
 
 
 {% for ... %} 后跟 {% empty %}，意思为如果for loop里面是空的，则显示empty中内容
