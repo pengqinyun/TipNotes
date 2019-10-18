@@ -31,7 +31,11 @@ friendship插件：
 
 
 Django-channel和chat系统：
+
 一开始的困惑在于asgiref，需要更新到最新版本，后续部署时这一点可能需要注意
 传输过程中基本上在用各种JSON，前端用了JSON.parse（收）和JSON.stringify（发），后端用了json.loads（收）和json.dumps
 这么做的原因在于，前后端传输的不只是text，还有username/roomname等信息，后续拓展时还可以加入各种别的信息，格式涉及到dict，以后还可能涉及到float，int等等
 如此传输可以保障python和javascript之间数据的无缝转换
+
+任何新的聊天线程（群组，私聊）都以group_add为发起，add的一方固定为该request.user（储存在socket的self.scope['user']里），另一方为群组或其他用户
+然后主要的逻辑再group_send里面，第一个parameter是send的对象，私聊的就send私聊，群聊的就send群聊
