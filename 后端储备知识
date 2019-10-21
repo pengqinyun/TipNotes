@@ -24,6 +24,10 @@ class My_Form(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(My_Form, self).__init__(*args, **kwargs)
         self.fields['address'].required = False
+        
+        
+Signals:
+通过设立signals和@receiver(foo_signal)，在该signal触发时，可以自动运行某些code
 
 
 
