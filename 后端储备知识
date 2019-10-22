@@ -3,8 +3,9 @@ filter返还的是一个queryset，因为可能有好几个符合条件的对象
 pandas本是一个处理大数据的插件，有各种matrices方法可以调用，但素！因为django自带的Json解码在应对中文编码时简直是一坨屎，所以本座还是捏着鼻子用了pandas，
 至于xlrd还不错，可以直接用.原始录入的院校，省市信息，本座都存到了“冲天流程”这个文件夹中
 
-
+关于Serializer：
 serializer中，使用genericAPIviews通过URL参数自定义queryset时，竟然一定还非要带上modelviewset，是乃一奇案也，现下忙着上线无暇深挖，日后可以慢慢破
+而且如果要在function里直接call serializer的话，一次只能serialize一个object，还得自己写for loop，还他妈有中文编码等问题...所以本座干脆在前端抓取了
 
 
 modelForm中，要specify某些fields不是requied，有两种方法
