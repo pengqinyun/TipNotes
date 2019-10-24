@@ -40,3 +40,5 @@ Django-channel和chat系统：
 
 任何新的聊天线程（群组，私聊）都以group_add为发起，add的一方固定为该request.user（储存在socket的self.scope['user']里），另一方为群组或其他用户
 然后主要的逻辑再group_send里面，第一个parameter是send的对象，私聊的就send私聊，群聊的就send群聊
+
+notification系统也有group_send，不光贪简单，用户在不同的设备登录时，都可以收到notification
