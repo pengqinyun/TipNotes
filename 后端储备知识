@@ -105,5 +105,22 @@ AsyncIO:
 单线程编程只能运用CPU算力的10%左右，要释放应用更多算力，async是解决办法
 
 
+Django channel的consumer中使用了如下代码：
+-------------------------------------------------------------------------------
+    try:
+        PrivateConsumer.members[self.group_name].add(self.socket)      
+    except:                                                             
+        PrivateConsumer.members[self.group_name] = set([self.socket])   
+---------------------------------------------------------------------------------
+这个代码有意思在，它规避了所有的报错，来试着分析一下
+members是该consumer class里自定义的literable dict，字典格式。如果该键位上（members[self.group_name]）为空的话，add方法失效，所以第一次新建走
+except逻辑，在该键位上新建set([self.socket])，其中self.socket是一个user object，然而set()函数只接受iliterable variable，所以要把user object
+list化，加上[]封装，变成一个user object的list representation
+后续的add里面，会自动把object转化成list representation，所有不必操心这一点。当该group_name键位上不为空时，add方法生效，检验该键位是否有同样的value
+如果有，则什么都不做，如果没有，则在该键位上加上新value
+总体来说，这是一个很高效简洁的设计
+
+
+
 
 
