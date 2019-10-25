@@ -10,6 +10,11 @@ pandas本是一个处理大数据的插件，有各种matrices方法可以调用
 JsonResponse与HttpResponse不一样，默认是传递dictionary，但也可以传递别的data type，譬如list，return JsonResponse(data, safe=false)即可
 serializer中，使用genericAPIviews通过URL参数自定义queryset时，竟然一定还非要带上modelviewset，是乃一奇案也，现下忙着上线无暇深挖，日后可以慢慢破
 
+RestFramework自带有各种view(APIview,ListAPIView什么的)，这是因为restframework接受的request和返还的response和django的不一样(本身它就不是处理http）
+而且使用API时有API自己的exceptions，通过继承views，我们也获得了相关的处理，还有相关性的加密和防盗，总之还是很必要的
+
+RestFramework中的viewset已经全盘写好了list到detail的逻辑，以api主页为例
+
 而且如果要在function里直接call serializer的话，一次只能serialize一个object，还得自己写for loop，还他妈有中文编码等问题...所以本座干脆在前端抓取了
 为什么一次只能serialize一个object呢？因为serializer就是这样设计的，基本上可以把serializer类比form，两个用途
 
@@ -21,7 +26,7 @@ class FooView(APIView):
         return Response(serializer.data)
         *** 注意！！！
         *** serialize完是一个OrderedDict，是一个django格式，javascript不知道咋回事，所以还要
-        *** json.dumps让它变成一个json格式，然后！
+        *** json.dumps让它变成一个json格式，然后！(好像也可以用上面的JsonResponse)
         *** 在前端用{{ foo_list }}的时候，javascript并不会把它当成一个string来parse（也不知道它是json格式了）
         *** 所以就会有各种乱码/&(l|g|quo)t什么的，所以要想在前端直接开用，还要加上mark_safe
         *** 所以终极态是 mark_safe(json.dumps(serializer.data))       一个简单的问题确实被复杂化了
@@ -32,9 +37,13 @@ class FooView(APIView):
             serializer.save()
             return Response(serializer.data)
             
-            
+
+Rest_framework要求每一个FooSerializer都有一个foo_detail的view，因为每个serializer不光处理serializing data，还处理POST,DELETE等逻辑，所以
+ModelSerializer并非没有这个detail view，只是REST已默认写好罢了，下文的相关bug也来源于此
+
 继承 HyperlinkedModelSerializer，会隐式添加一个 HyperlinkedRelatedField 字段 url，而所有的外键都会变成 HyperlinkedRelatedField 字段，所以需要
 手动设置 view_name 值，解决办法是在setting里面加上'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
+即，HyperlinkedModelSerializer expected to be used by some foo-detail view，如果用其他view来call，就会报错，所以要强行在每个外键上覆盖view_name
 
 
 
