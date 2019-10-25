@@ -31,6 +31,10 @@ class FooView(APIView):
         if serializer.is_valid()
             serializer.save()
             return Response(serializer.data)
+            
+            
+继承 HyperlinkedModelSerializer，会隐式添加一个 HyperlinkedRelatedField 字段 url，而所有的外键都会变成 HyperlinkedRelatedField 字段，所以需要
+手动设置 view_name 值，解决办法是在setting里面加上'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning'
 
 
 
