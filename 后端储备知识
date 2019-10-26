@@ -4,12 +4,9 @@ pandas本是一个处理大数据的插件，有各种matrices方法可以调用
 至于xlrd还不错，可以直接用.原始录入的院校，省市信息，本座都存到了“冲天流程”这个文件夹中
 
 
-```diff
--关于Serializer：
-```
+关于Serializer：
 
 JsonResponse与HttpResponse不一样，默认是传递dictionary，但也可以传递别的data type，譬如list，return JsonResponse(data, safe=false)即可
-serializer中，使用genericAPIviews通过URL参数自定义queryset时，竟然一定还非要带上modelviewset，是乃一奇案也，现下忙着上线无暇深挖，日后可以慢慢破
 
 试看这个view：
 
@@ -106,6 +103,9 @@ ModelSerializer并非没有这个detail view，只是REST已默认写好罢了�
                 'user':{'view_name':'api:user-detail'}
             }
 ----------------------------------------------------------------------------------------------------------------------------------
+
+所以三级联动菜单中，使用listAPIView时，REST需要提供city-detail等view，而listAPIView是不自动写这些detail的，所以会报错。所以带上viewset，就自动定义
+了
 
 
 
