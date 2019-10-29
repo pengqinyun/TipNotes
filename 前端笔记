@@ -30,3 +30,7 @@ Django template也可以display各种form errors，假设使用了{{ form.as_p }
 <script>中好像可以直接用global var foo = {{...}}来提取template variables
 
 websocket归websocket，用ajax可读性更强，Vue归Vue，不要和websocket混用（容易看不懂）
+
+关于Forms：
+使用Django自带的forms主要是为了他自带的validation，其实前端输出很多涉及到style，input type等信息，全在forms里define可读性简直了，完全可以前端自己写，
+把name甚至id（其实不是很必要）看准了就行，这样可读性也好很多
