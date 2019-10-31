@@ -13,4 +13,5 @@ scope就像request，包含很多原始信息
 使用routing时，还是用URL的general expression，因为path很多情况下不兼容
 
 Websocket：
-每一个websocket instance由 WebSocket(url[, protocols]) 组成，其中protocols一般用默认，不specify，具体看收藏
+------ 每一个websocket instance由 WebSocket(url[, protocols]) 组成，其中protocols一般用默认，不specify，具体看收藏
+------ websocket的routing好像不支持'-',所以不能使用slug了，在这里还是用id吧
