@@ -42,3 +42,6 @@ Django-channel和chat系统：
 然后主要的逻辑再group_send里面，第一个parameter是send的对象，私聊的就send私聊，群聊的就send群聊
 
 notification系统也有group_send，不光贪简单，用户在不同的设备登录时，都可以收到notification
+
+买卖过程中需要创建相关的notification并向所有粉丝广播该notification，比较有意思的是广播环节一定要hardcode，主要是timestamp不好处理，因为model中
+timestamp是伴随着save方法自动生成的，如果再导出来，其实就为了dry而dry了，还增加了数据库负担，所以这一步直接hardcode，没什么问题
