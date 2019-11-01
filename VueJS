@@ -1,5 +1,18 @@
-基础tips：
+Vue是基于javascript上编出的应用工具，所以先从javascript的一些特性记起：
 
+定义function时，其实不用太考虑scope，哪怕你写的是var，该variable也只能在function里面access，这是javascript的compile机制决定的，需要注意的是所谓的
+block scope，即if(...){var foo = ...},此处的foo是可以在document里面access的,即是所谓的Hoisting机制
+
+Hoisting概括来讲，就是把varibale的定义步骤和function的执行步骤全部提高优先执行，variable的赋值步骤则随后执行
+所以基于hoisting，我们应该尽量写anonymous functions，譬如
+        var a = function(){.........}
+此时会加载a的定义步骤，但除非具体执行该function，否则不会加载function
+
+let person = new Object() ----------- 定义Object
+
+
+
+基础tips：
 
 为了与django template做区分，在每个Vue instance中设置   delimiters: ['[[', ']]']
 混用{{}}和[[]]是会报错的，也是一种不好的coding风格
