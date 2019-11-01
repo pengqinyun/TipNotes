@@ -19,6 +19,7 @@ fixed不管怎么scroll都固定处于整个页面的某固定位置,fixed没有
 sticky是一个相对scroll存在的概念，譬如说某元素是sticky并top:140px，那一开始该元素处于正常flow中，但一旦scroll下来到140px时，该元素就变成fixed了
 需要注意的是，sticky的fixed形态只在父系元素里有用，换言之when sticky element hit the bottom of its parent element, it stops been fixed
 所以譬如一个目录，A,B,C...是不同的sticky tag，如果A,B,C的父系之间相互平行，那A碰到B后就会消失，B变sticky，碰到C后消失.....
+最后注意sticky要prefix，即-webkit-sticky;-moz-sticky;-ms-sticky;-o-sticky
 
 
 
