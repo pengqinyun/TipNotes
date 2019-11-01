@@ -129,3 +129,14 @@ header{                     #可以选取任意元素，grid-area名字也可以
 }
 
 @media screen and (min-width: 760px){.....}
+
+
+Flex Box:
+
+-------把父系元素定义成 display：flex, 则父系内所有元素呈直线排列
+-------每个子元素可以用 flex:3 来调节, CSS会自动按比例在每一个父元素里分配
+------- order:2 还可以assign不同的顺序
+------- align-items: flex-start/-end/center 可竖直调节在父元素中的位置
+------- flex-direction:column 可让子元素数值排列
+------- width:20% 这个和CSS一样，按父系切20%给它,按照convention来说应该用flex-basis
+------- justify-content: flex-start/-end/center/space-between(no margin on the side)/space-around
