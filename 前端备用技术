@@ -6,15 +6,19 @@ Position
 
 static是默认的flow，relative是保存原有的坑，接受相对于原有的坑的新位置
 
-absolute的父元素一定要是relative，是相较于父元素的relative，处于一个absolute position
+absolute的父元素一定要是relative，是相较于父元素的relative，处于一个absolute position,实际上absolute会把所有非static的父系元素认为父系
+基本上relative唯一的用法就是做absolute等position的父元素，因为本身去位移relative会遮挡别的static flow, which is very confusing
+
 当元素处于absolute时，该元素被移出static flow并失去本属于它的static空间，这点和relative不同
 举例，父元素下第一个子元素是img，第二个是div，让div中文字固定的悬浮在img上，就可以用absolute
 应用场景举例，某个img a:hover可以把position改成relative然后top：-4px，如此鼠标hover时图片会向上移动一点点
 
-fixed不管怎么scroll都固定处于某位置
+fixed不管怎么scroll都固定处于整个页面的某固定位置,fixed没有父亲！
 每一个默认static元素都有默认z-index=0
 
 sticky是一个相对scroll存在的概念，譬如说某元素是sticky并top:140px，那一开始该元素处于正常flow中，但一旦scroll下来到140px时，该元素就变成fixed了
+需要注意的是，sticky的fixed形态只在父系元素里有用，换言之when sticky element hit the bottom of its parent element, it stops been fixed
+所以譬如一个目录，A,B,C...是不同的sticky tag，如果A,B,C的父系之间相互平行，那A碰到B后就会消失，B变sticky，碰到C后消失.....
 
 
 
