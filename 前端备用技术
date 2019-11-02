@@ -30,103 +30,105 @@ Pseudo Class
 
 
 Animation
-transform: translate(X, Y) / scale(X,Y) / rotate()
-transition: background 1s, transform 1s 1s ease-in    # 可以按顺序调节动画，第一个parameter是duration,第二个是delay,第三个是timing function
+      transform: translate(X, Y) / scale(X,Y) / rotate()
+      transition: background 1s, transform 1s 1s ease-in    # 可以按顺序调节动画，第一个parameter是duration,第二个是delay,第三个是timing function
 
-@keyframes foo {
-  from{ transform: translateX(0) }
-  to{ transform: translateX(200px) }
-}
-# 某张图片{
-  .......
-  animation-name: foo;
-  animation-duration: 3s;
-  animation-fill-mode: forwards;         # 意思是到点之后停那不动，否则default是重新回原点backwards
-  animation-delay: 2s;
-  animation-iteration-count: infinite;
-  animation-direction: reverse/normal/alternate;
-  animation-timing-function: linear;    # default是ease
-}
-@keyframes jump {
-  0%{ top:-40px }
-  50%{ top:0px }
-  100%{ top:-40px }
-}
-某张图片{
-  .......
-  aniamtion: drive 3s both infinite linear,
-             jump 0.3s 1.2s ease;
-}
+      @keyframes foo {
+        from{ transform: translateX(0) }
+        to{ transform: translateX(200px) }
+      }
+      # 某张图片{
+        .......
+        animation-name: foo;
+        animation-duration: 3s;
+        animation-fill-mode: forwards;         # 意思是到点之后停那不动，否则default是重新回原点backwards
+        animation-delay: 2s;
+        animation-iteration-count: infinite;
+        animation-direction: reverse/normal/alternate;
+        animation-timing-function: linear;    # default是ease
+      }
+      @keyframes jump {
+        0%{ top:-40px }
+        50%{ top:0px }
+        100%{ top:-40px }
+      }
+      某张图片{
+        .......
+        aniamtion: drive 3s both infinite linear,
+                   jump 0.3s 1.2s ease;
+      }
 
 
 Grid基础
-# 父系 {
-  display: grid;
-  grid-template-columns: 20% 30% 50%;  # or  grid-template-columns: 1fr 2fr 1fr;  or columns比较多时： grid-template-columns:repeat(9,1fr);
-  grid-template-rows: 200px 200px 300px 500px;      # 规定了每一row的高度   or    grid-template-rows:repeat(3,200px);   也可以套minmax
-  grid-auto-rows: 200px;               # 固定每一格高度为200px  or grid-auto-rows: minmax(200px,auto);
-  grid-column-gap: 10px;               # 左右无gap，每一column中间的gap
-  grip-row-gap: 10px;                  # 或者直接设 grid-gap: 10px;
-  max-width: 960px;
-  margin: 0 auto;
-}
+      # 父系 {
+        display: grid;
+        grid-template-columns: 20% 30% 50%;  # or  grid-template-columns: 1fr 2fr 1fr;  or columns比较多时： grid-template-columns:repeat(9,1fr);
+        grid-template-rows: 200px 200px 300px 500px;      # 规定了每一row的高度   or    grid-template-rows:repeat(3,200px);   也可以套minmax
+        grid-auto-rows: 200px;               # 固定每一格高度为200px  or grid-auto-rows: minmax(200px,auto);
+        grid-column-gap: 10px;               # 左右无gap，每一column中间的gap
+        grip-row-gap: 10px;                  # 或者直接设 grid-gap: 10px;
+        max-width: 960px;
+        margin: 0 auto;
+      }
 
 Grid中阶
-# 父系 {
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(4, minmax(150px, auto));
-  grid-gap: 10px;
-  align-items: strech/start/end;
-  justify-items: start/end;
-}
-# 父系 one {
-  grid-coloumn-start: 1;
-  grid-coloumn-end: 3;               # 或者可以统一 grid-column: 1/3;   记住1是起始位置，即原点坐标是1，1，所以1/3其实只占了两column
-  grid-row: 2/4;
-  justify-self: start;
-  align-self: end;
-}
+
+      # 父系 {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(4, minmax(150px, auto));
+        grid-gap: 10px;
+        align-items: strech/start/end;
+        justify-items: start/end;
+      }
+      # 父系 one {
+        grid-coloumn-start: 1;
+        grid-coloumn-end: 3;               # 或者可以统一 grid-column: 1/3;   记住1是起始位置，即原点坐标是1，1，所以1/3其实只占了两column
+        grid-row: 2/4;
+        justify-self: start;
+        align-self: end;
+      }
 小trick，在父系里面建一个id为grid的div，然后在div里面放12个<p></p>
-# 父系 {
-  position: relative;
-}
-# grid {
-  display: grid;
-  position: absolute;
-  top: 0;
-  left: 0;
-  grid-template-columns: repeat(12,1fr);
-  grid-auto-rows: minmax(100%,auto);
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  padding: 0;
-  display: none;
-}
-# grid p {
-  border: 1px solid;
-  background: #000;
-  margin: 0;
-  opacity: 0.2;
-}
+      # 父系 {
+        position: relative;
+      }
+      # grid {
+        display: grid;
+        position: absolute;
+        top: 0;
+        left: 0;
+        grid-template-columns: repeat(12,1fr);
+        grid-auto-rows: minmax(100%,auto);
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        padding: 0;
+        display: none;
+      }
+      # grid p {
+        border: 1px solid;
+        background: #000;
+        margin: 0;
+        opacity: 0.2;
+      }
 然后通过一个checkbox来勾选显示与否，首先在父系外设一个<input type="checkbox">
-input:checked + #父系#grid {
-  display: grid;
-}
+      input:checked + #父系#grid {
+        display: grid;
+      }
 
 
 Grid高阶
-header{                     #可以选取任意元素，grid-area名字也可以随便起
-  grid-area:header;
-}
-# 父系 {
-  "header header header header"
-  "aside . main main"                         # . 代表空白空间
-  "nav nav main main"
-  "section section section section"
-  "section section section section"
-  "footer footer footer footer";
-}
+
+      header{                     #可以选取任意元素，grid-area名字也可以随便起
+        grid-area:header;
+      }
+      # 父系 {
+        "header header header header"
+        "aside . main main"                         # . 代表空白空间
+        "nav nav main main"
+        "section section section section"
+        "section section section section"
+        "footer footer footer footer";
+      }
 
 @media screen and (min-width: 760px){.....}
 
@@ -140,3 +142,21 @@ Flex Box:
 ------- flex-direction:column 可让子元素数值排列
 ------- width:20% 这个和CSS一样，按父系切20%给它,按照convention来说应该用flex-basis
 ------- justify-content: flex-start/-end/center/space-between(no margin on the side)/space-around
+
+
+Transition & Animation
+
+例：
+  .box{... transition codes ...}      和       .box:hover{......}
+  
+transition-duration: 500ms;    --------- 最好还是用ms，因为javascript只接受ms
+transition-property: background, transform;    ---- specify某个property做transition，其余未specify的不受该{}内code定义,虽然也可以用all,不过对
+                                               ---- 手机的GPU可能过载,因此就算同时做多个效果，也还是并列都写上的好
+transition-timing-function: ease/linear/ease-in/ease-out/ease-in-out      ------- ease就是slow，ease-in就是in的时候slow,另浏览器里面开dev
+                                                                          ------- 可以自己选择变化曲线
+transition-delay: 2s  ---------------- 这个不用说了
+
+多个的时候:
+  transition: 1s background ease-in 500ms,
+              500ms transform ease-out 100ms;
+
