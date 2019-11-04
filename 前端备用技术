@@ -159,4 +159,26 @@ transition-delay: 2s  ---------------- 这个不用说了
 多个的时候:
   transition: 1s background ease-in 500ms,
               500ms transform ease-out 100ms;
+              
+              
+Float & Flow：
 
+---------- float会把elements移出flow
+---------- 移出后top/buttom margin就失效了，可以通过在float element下置放一个空的div，并用clear:both让document flow回复normal
+           或者抓取float的那个element,用psudo class
+           .foo:after {
+               content:"";
+               display: block;
+               clear: both;
+           }
+
+
+      p {         调整text的小技巧
+          -webkit-column-count: 3;
+          column-count: 3;
+          -webkit-column-gap: 30px;
+          column-gap: 30px;
+          -webkit-column-rule: 1px solid #ccc;
+          column-rule: 1px solid #ccc;
+          text-align: justify
+      }
