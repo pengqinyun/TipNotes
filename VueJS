@@ -32,7 +32,7 @@ v-on:keyup.alt.enter可以追综所有的keyup事件，但只有在同时按下a
 如果直接用[[foo()]]并且foo() depends on data中的foo的话，每一次foo变，Vue都会重新跑一次foo()，非常的inefficient，所以，这时候用computed property
 computed:{}格式基本和method一样，只是computed properties只会盯着相关的data，节省很多资源,computed property在[[]]中是当作property玩
 
-<...v-on:click="foo=!foo" v-bind:class="{available:foo}"...>此处foo是个boolean值，当设定为true时，该tag具备这个class，反之则不具备这个特性可以
+<...v-on:click="foo=!foo" v-bind:class="{'available':foo}"...>此处foo是个boolean值，当设定为true时，该tag具备这个class，反之则不具备这个特性可以
 用来做红白，黑银两套UI
 <p v-if="foo">foo为true时显示，false时不显示，后续还可以加v-else-if，不过elseif只在第一个if为false时fire
 v-show和v-if类似，区别是v-show是设置display：none而v-if是彻底删掉
