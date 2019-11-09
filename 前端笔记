@@ -34,3 +34,6 @@ websocket归websocket，用ajax可读性更强，Vue归Vue，不要和websocket�
 关于Forms：
 使用Django自带的forms主要是为了他自带的validation，其实前端输出很多涉及到style，input type等信息，全在forms里define可读性简直了，完全可以前端自己写，
 把name甚至id（其实不是很必要）看准了就行，这样可读性也好很多
+
+关于ICONS：
+设计的icon以unicode形式引用没有问题，但是每次新增时很麻烦，所以后续的icons都统一用阿里云矢量图在线项目好了，记得是以微博登录的
