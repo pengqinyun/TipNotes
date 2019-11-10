@@ -37,3 +37,6 @@ websocket归websocket，用ajax可读性更强，Vue归Vue，不要和websocket�
 
 关于ICONS：
 设计的icon以unicode形式引用没有问题，但是每次新增时很麻烦，所以后续的icons都统一用阿里云矢量图在线项目好了，记得是以微博登录的
+
+关于CSS缓存：
+ctrl+F5,强制刷他妈的
