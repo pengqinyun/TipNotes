@@ -162,6 +162,7 @@ DetailView使用时传一个<pk>进url
 
 
 在model里定义get_absolute_url，前端调用，代码更dry
+Django文档里给出的应用场景是 <a href="{{ object.get_absolute_url }}">，应该是一个列表的形式，在好友侧边栏里不予采用
 
 
 {% for ... %} 后跟 {% empty %}，意思为如果for loop里面是空的，则显示empty中内容
