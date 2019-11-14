@@ -66,4 +66,9 @@ computed:{
 所以整个逻辑是，先从后端传来blogs，然后前端针对this.blogs做定制操作，其实还是比较简单直白的
 
 
+Javascript的时间机制：
+
+new Date("2015-04-12")
+
+
 
