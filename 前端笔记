@@ -40,3 +40,8 @@ websocket归websocket，用ajax可读性更强，Vue归Vue，不要和websocket�
 
 关于CSS缓存：
 ctrl+F5,强制刷他妈的
+
+使用了Axios的地方：
+----3级联动菜单
+----清空通知，清空好友消息通知
+注意一定要有前缀http://,不然header不知道什么协议，后续转https时要更改
