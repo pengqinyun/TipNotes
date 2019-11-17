@@ -28,3 +28,7 @@ follow convention，如果要使用partial引入别的SCSS，最好命名_foo.sc
   padding: $buttonPadding + 30;             对于SCSS来说，不需要specify px，不过硬要加也没问题
   color: $buttonColor * 1.5;                brighter
 }
+
+CSS最新写法：
+----- &:focus可以直接继承button
+----- calc($size - 40px) 注意space很重要
