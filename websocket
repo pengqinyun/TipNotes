@@ -15,3 +15,8 @@ scope就像request，包含很多原始信息
 Websocket：
 ------ 每一个websocket instance由 WebSocket(url[, protocols]) 组成，其中protocols一般用默认，不specify，具体看收藏
 ------ websocket的routing好像不支持'-',所以不能使用slug了，在这里还是用id吧
+
+有一个BUG：
+当我把main Websocket放进base_layout中（which I should do so)时，再开别的页面，初始推送的notifications会再推送一次
+所以纯粹为了解决这个bug，我在notificationConsumer中强行加入了n_id一项，这一项的意义就是纯粹就是解决这一个BUG，所以除了初始推送，以后再发送任何
+notification的时候，n_id随便写点就好了，譬如，-1和-2（肯定不会重)
