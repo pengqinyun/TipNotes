@@ -45,3 +45,6 @@ ctrl+F5,强制刷他妈的
 ----3级联动菜单
 ----清空通知，清空好友消息通知
 注意一定要有前缀http://,不然header不知道什么协议，后续转https时要更改
+
+Jquery和Javascript：
+处理好友/通知侧边栏时发现，removeClass是Jquery的function，innerText是Javascript的function，要调用function，前面就要使用对应的选择器，不可混用
