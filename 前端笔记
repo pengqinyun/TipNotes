@@ -48,3 +48,5 @@ ctrl+F5,强制刷他妈的
 
 Jquery和Javascript：
 处理好友/通知侧边栏时发现，removeClass是Jquery的function，innerText是Javascript的function，要调用function，前面就要使用对应的选择器，不可混用
+然后动态生成的元素(譬如好友聊天)中，一系列Jquery事件是不触发的(如click，keyup),解决办法是用
+$('body').on('keyup', '#myID', function(e){})  -------------- 参见baselayout里面的代码
