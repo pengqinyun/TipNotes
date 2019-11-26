@@ -70,7 +70,9 @@ Javascript的时间机制：
 
 new Date("2015-04-12")
 
-continue是继续下一个父系迭代，break是停止整个迭代
+零星的知识点
+-----continue是继续下一个父系迭代，break是停止整个迭代
+-----可以用一个function(abc)来拆分一个list，使之成为一个dictionary，调用时，foo.abc
 
 
 
