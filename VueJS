@@ -70,5 +70,7 @@ Javascript的时间机制：
 
 new Date("2015-04-12")
 
+continue是继续下一个父系迭代，break是停止整个迭代
+
 
 
