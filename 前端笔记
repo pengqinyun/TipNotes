@@ -53,5 +53,4 @@ $('body').on('keyup', '#myID', function(e){})  -------------- 参见baselayout�
 
 运用mark_safe(json.dumps)这一套会将parameters彻底转化为json格式，即不能在html里调用，这点需注意
 
-关于交易页面：
------交易页面中周K的数据量，计算量特别大，打算做一个外联链接算了，不然太影响加载速度
+
