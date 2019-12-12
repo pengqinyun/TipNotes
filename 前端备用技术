@@ -31,7 +31,8 @@ Pseudo Class
 
 Animation
       transform: translate(X, Y) / scale(X,Y) / rotate()
-      transition: background 1s, transform 1s 1s ease-in    # 可以按顺序调节动画，第一个parameter是duration,第二个是delay,第三个是timing function
+      transition: background 1s, transform 1s 1s ease-in    # 可以按顺序调节动画，第一个parameter是duration,第二个是delay,
+                                                              第三个是timing function
 
       @keyframes foo {
         from{ transform: translateX(0) }
@@ -62,9 +63,11 @@ Animation
 Grid基础
       # 父系 {
         display: grid;
-        grid-template-columns: 20% 30% 50%;  # or  grid-template-columns: 1fr 2fr 1fr;  or columns比较多时： grid-template-columns:repeat(9,1fr);
-        grid-template-rows: 200px 200px 300px 500px;      # 规定了每一row的高度   or    grid-template-rows:repeat(3,200px);   也可以套minmax
-        grid-auto-rows: 200px;               # 固定每一格高度为200px  or grid-auto-rows: minmax(200px,auto);
+        grid-template-columns: 20% 30% 50%;  
+        # or  grid-template-columns: 1fr 2fr 1fr;  or columns比较多时： grid-template-columns:repeat(9,1fr); 建议使用fr，别的会有margin问题
+        grid-template-rows: 200px 200px 300px 500px;      # 规定了每一row的高度   or    grid-template-rows:repeat(3,200px);也可以套minmax
+        grid-auto-rows: 200px;               # 固定每一格高度为200px  
+        or grid-auto-rows: minmax(200px,auto);  # 意思是如果内容不超标，200px，如果超标则按超标的来
         grid-column-gap: 10px;               # 左右无gap，每一column中间的gap
         grip-row-gap: 10px;                  # 或者直接设 grid-gap: 10px;
         max-width: 960px;
@@ -77,13 +80,13 @@ Grid中阶
         grid-template-columns: repeat(6, 1fr);
         grid-template-rows: repeat(4, minmax(150px, auto));
         grid-gap: 10px;
-        align-items: strech/start/end;
-        justify-items: start/end;
+        align-items: strech/start/end;          # default是stretch，which means to stretch the whole area
+        justify-items: start/end;               # 这个管水平，align管垂直
       }
-      # 父系 one {
+      # 父系 one {                    # 针对子系
         grid-coloumn-start: 1;
         grid-coloumn-end: 3;               # 或者可以统一 grid-column: 1/3;   记住1是起始位置，即原点坐标是1，1，所以1/3其实只占了两column
-        grid-row: 2/4;
+        grid-row: 2/4;                     # 这样布局还可以重叠 
         justify-self: start;
         align-self: end;
       }
