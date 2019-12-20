@@ -8,6 +8,7 @@ static是默认的flow，relative是保存原有的坑，接受相对于原有�
 
 absolute的父元素一定要是relative，是相较于父元素的relative，处于一个absolute position,实际上absolute会把所有非static的父系元素认为父系
 基本上relative唯一的用法就是做absolute等position的父元素，因为本身去位移relative会遮挡别的static flow, which is very confusing
+使用relative绝对定位时记得用right而不是margin-right，margin-right一般作用于右边有元素的情况
 
 当元素处于absolute时，该元素被移出static flow并失去本属于它的static空间，这点和relative不同
 举例，父元素下第一个子元素是img，第二个是div，让div中文字固定的悬浮在img上，就可以用absolute
