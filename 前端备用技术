@@ -186,3 +186,6 @@ Float & Flow：
           column-rule: 1px solid #ccc;
           text-align: justify
       }
+      
+Transform:
+--------translate(-50%, -50%)实现垂直居中，该属性以左上角为起点故此
