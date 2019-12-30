@@ -72,3 +72,7 @@ Vue里处理       this.$refs.foo.value               除了value还有innerHTML
 import/export
 基本上在src里面玩，每新建一个component就是在src里面新建一个.vue，每一个.vue的<script>里都自然有export default，表示输出该component
 import基本上在main.js里面，import data，give it a new name---Vue.component('test',niggers);然后在app里调用test就可以了
+也可以个别调用，在主app.vue里面，同样去import，然后在export default里面添加components:{'test': niggers}
+
+需要注意的是子component里面，template只能包含一个root component，即一个HTML tag
+<style scoped>可以把定义的style局限到template里面，不然就是global了
