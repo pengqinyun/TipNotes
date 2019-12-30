@@ -1,0 +1,48 @@
+基本的json格式是[{key:val, key:val, key:val},{},{},...]
+
+Javascript竟然是一个单线程处理语言....所以同步使用好几个Ajax时，线程之间的先后会出人意料，可以使用async：false来强制浏览器完成某一段ajax，或者用promise
+但是傻逼Axios就没有这么激灵了，于是机智如我只好在axios里面循环嵌套，所以对于股价的接入接口，一定要慎之又慎了，哎..
+
+动态生成变量：
+    function create_variable(num){
+        var name = "test_"+num;   //生成变量名
+        window[name] = 100;
+        window['name'] = 200;   //注意看中括号里的内容加引号和不加引号的区别
+        }
+
+        create_variable(2);
+        alert(test_2);  // 100;
+        alert(name); //200;
+        
+Jquery和Javascript：
+处理好友/通知侧边栏时发现，removeClass是Jquery的function，innerText是Javascript的function，要调用function，前面就要使用对应的选择器，不可混用
+然后动态生成的元素(譬如好友聊天)中，一系列Jquery事件是不触发的(如click，keyup),解决办法是用
+$('body').on('keyup', '#myID', function(e){})  -------------- 参见baselayout里面的代码
+
+定义function时，其实不用太考虑scope，哪怕你写的是var，该variable也只能在function里面access，这是javascript的compile机制决定的，需要注意的是所谓的
+block scope，即if(...){var foo = ...},此处的foo是可以在document里面access的,即是所谓的Hoisting机制
+
+Hoisting概括来讲，就是把varibale的定义步骤和function的执行步骤全部提高优先执行，variable的赋值步骤则随后执行
+所以基于hoisting，我们应该尽量写anonymous functions，譬如
+        var a = function(){.........}
+此时会加载a的定义步骤，但除非具体执行该function，否则不会加载function
+
+let person = new Object() ----------- 定义Object
+
+
+
+时间机制：
+
+new Date("2015-04-12")
+
+for(let v of holdings) {                使用这个遍历比较方便
+            console.log(v);
+        };
+
+零星的知识点
+-----continue是继续下一个父系迭代，break是停止整个迭代
+-----可以用一个function(abc)来拆分一个list，使之成为一个dictionary，调用时，foo.abc
+
+forEach的可能用法：
+前端getElementsByClassName会return一个object，遍历该object可以用forEach
+但注意forEach一般是对list，所以要切换一下，[].forEach.call(class_list,(v)=>{v.style.color = '#FF0000'})
