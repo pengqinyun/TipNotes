@@ -1,5 +1,3 @@
-
-
 基础tips：
 
 为了与django template做区分，在每个Vue instance中设置   delimiters: ['[[', ']]']
@@ -59,4 +57,18 @@ Vue里处理       this.$refs.foo.value               除了value还有innerHTML
 
 
 
+单页面应用
 
+-------- 是未来可能的一种趋势，有优势也有对应的劣势，django是一个发展悠久的框架，很多功能很完备，骤而替换，会有很多相应而来的问题，换框架一定要谨慎
+-------- 但做单方面应用，一个是可以把网络技术推广到日常应用（如Ajax不支持跨域请求，这时候拿VUE CLI做一个轻量级后台，可以规避这个问题)，一个是熟悉下
+-------- 该技术，以便日后有任何应用
+
+1，安装node.js(npm也包含在里面了)，相当于一个架构
+2，cmd里面cd到对应的folder，vue init <templateName> <projectName>，一般templateName用webpack-simple
+3, 随便选选，cd到对应的project里面
+4，npm install
+5, 不想安装其他editor应用的话，每次cd到project里面输入 npm run dev即可，每次停止ctrl+C
+
+import/export
+基本上在src里面玩，每新建一个component就是在src里面新建一个.vue，每一个.vue的<script>里都自然有export default，表示输出该component
+import基本上在main.js里面，import data，give it a new name---Vue.component('test',niggers);然后在app里调用test就可以了
