@@ -2,12 +2,7 @@
 
 在Axios中不能直接调用this，需要先设一个var foo = this，后续所有this都用foo来指代（可能是axios协议的问题）
 
-基本的json格式是[{key:val, key:val, key:val},{},{},...]
-
 this调用父类时，可能会因为嵌套层次太深而出现调用不清的情况（譬如{}镶套太深了，其实调用的是祖父类，却使用了this），这种情况需要明确祖父类，即var foo=this
-
-Javascript竟然是一个单线程处理语言....所以同步使用好几个Ajax时，线程之间的先后会出人意料，可以使用async：false来强制浏览器完成某一段ajax，或者用promise
-但是傻逼Axios就没有这么激灵了，于是机智如我只好在axios里面循环嵌套，所以对于股价的接入接口，一定要慎之又慎了，哎..
 
 v-model="foo[3].attr"这样写是完全可以的，但一定要保证return存在，否则javascript报错
 
@@ -27,8 +22,6 @@ Django template也可以display各种form errors，假设使用了{{ form.as_p }
 
 资讯可以做成button，看起来还不错
 
-<script>中好像可以直接用global var foo = {{...}}来提取template variables
-
 websocket归websocket，用ajax可读性更强，Vue归Vue，不要和websocket混用（容易看不懂）
 
 关于Forms：
@@ -38,17 +31,6 @@ websocket归websocket，用ajax可读性更强，Vue归Vue，不要和websocket�
 关于ICONS：
 设计的icon以unicode形式引用没有问题，但是每次新增时很麻烦，所以后续的icons都统一用阿里云矢量图在线项目好了，记得是以微博登录的
 
-javascript动态生成变量：
-    function create_variable(num){
-        var name = "test_"+num;   //生成变量名
-        window[name] = 100;
-        window['name'] = 200;   //注意看中括号里的内容加引号和不加引号的区别
-        }
-
-        create_variable(2);
-        alert(test_2);  // 100;
-        alert(name); //200;
-
 关于CSS缓存：
 ctrl+F5,强制刷他妈的
 
@@ -56,11 +38,6 @@ ctrl+F5,强制刷他妈的
 ----3级联动菜单
 ----清空通知，清空好友消息通知
 注意一定要有前缀http://,不然header不知道什么协议，后续转https时要更改
-
-Jquery和Javascript：
-处理好友/通知侧边栏时发现，removeClass是Jquery的function，innerText是Javascript的function，要调用function，前面就要使用对应的选择器，不可混用
-然后动态生成的元素(譬如好友聊天)中，一系列Jquery事件是不触发的(如click，keyup),解决办法是用
-$('body').on('keyup', '#myID', function(e){})  -------------- 参见baselayout里面的代码
 
 运用mark_safe(json.dumps)这一套会将parameters彻底转化为json格式，即不能在html里调用，这点需注意
 
