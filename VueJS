@@ -68,6 +68,7 @@ Vue里处理       this.$refs.foo.value               除了value还有innerHTML
 3, 随便选选，cd到对应的project里面
 4，npm install
 5, 不想安装其他editor应用的话，每次cd到project里面输入 npm run dev即可，每次停止ctrl+C
+6, npm install axios，在main.js里面import axios from 'axios' Vue.prototype.axios = axios;
 
 import/export
 基本上在src里面玩，每新建一个component就是在src里面新建一个.vue，每一个.vue的<script>里都自然有export default，表示输出该component
@@ -76,3 +77,4 @@ import基本上在main.js里面，import data，give it a new name---Vue.compone
 
 需要注意的是子component里面，template只能包含一个root component，即一个HTML tag
 <style scoped>可以把定义的style局限到template里面，不然就是global了
+
