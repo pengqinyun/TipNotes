@@ -1,0 +1,104 @@
+<template>
+  <div id="app">
+    <input v-model="stock" type="text">
+    <button v-on:click="start()">确定</button>
+    <div id="content">
+      <div class="col"><div>时间</div><div>价格</div><div>手数</div><div>买卖</div></div>
+      <div id="main">
+        <div class="col" v-for="(piece, index) in content">
+          <div v-bind:class="{red:piece.color}">{{piece.time}}</div><div v-bind:class="{red:piece.color}">{{piece.price}}</div>
+          <div v-bind:class="{red:piece.color}">{{piece.vol}}</div><div v-bind:class="{red:piece.color}">{{piece.trade}}</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'App',
+  data: function(){
+    return {
+      content: [],
+      stock: ''
+    }
+  },
+  methods: {
+    thread:function(){
+      let getMain = document.getElementById('main').innerHTML;
+      getMain = '';
+      this.$http.get('/price/data/index.php?appn=detail&action=data&c='+this.stock+'&p=2')
+        .then(function(resp){
+          let receive = resp.data.slice(26,-1); // 这个端口返还的是一个string
+          let dataList = receive.split('|');
+          for (let i in dataList){
+            let individual = dataList[i].split('/');
+            let time = individual[1];
+            let price = individual[2];
+            let vol = individual[5];
+            let trade = individual[6];
+            if (trade == 'B'){
+              trade = '买';
+              var color = true
+            } else {
+              trade = '卖'
+              var color = false
+            }
+            let piece = {'time':time, 'price':price, 'vol':vol,'trade':trade,'color':color};
+            this.content.unshift(piece)
+          }
+          console.log('done')
+        }).catch(function(e){
+          console.log(e)
+        })
+    },
+
+    start:function(){
+      this.thread();
+      setInterval(this.thread, 9000);
+    }
+  }
+}
+var raw = 'v_detail_data_' + 'sz002451'
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+.col {
+  width: 600px;
+  border-bottom: 1px solid grey;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  font-weight: 600;
+}
+
+.red {
+  color: orangered;
+}
+</style>
+
+
+import Vue from 'vue'
+import App from './App'
+import router from './router'
+import VueResource from 'vue-resource'
+
+Vue.config.productionTip = false;
+Vue.use(VueResource)
+
+/* eslint-disable no-new */
+new Vue({
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})
