@@ -78,3 +78,5 @@ import基本上在main.js里面，import data，give it a new name---Vue.compone
 需要注意的是子component里面，template只能包含一个root component，即一个HTML tag
 <style scoped>可以把定义的style局限到template里面，不然就是global了
 
+整体了解下来的感受，是以Vue Cli做后台的话，流畅感上面稍好一些(毕竟全javascript)，但考虑到资源，人工，普适等，并不适合大型项目，目前看来合适的场景，
+仅限于做轻量级应用，并且该应用的主要功能大量依赖vue框架，总体来说，没有特别大的意义
