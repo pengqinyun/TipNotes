@@ -80,3 +80,21 @@ import基本上在main.js里面，import data，give it a new name---Vue.compone
 
 整体了解下来的感受，是以Vue Cli做后台的话，流畅感上面稍好一些(毕竟全javascript)，但考虑到资源，人工，普适等，并不适合大型项目，目前看来合适的场景，
 仅限于做轻量级应用，并且该应用的主要功能大量依赖vue框架，总体来说，没有特别大的意义
+
+webpack的proxyTable,在config里面：
+index.js-----proxytable
+'/price': {
+        target:'http://stock.gtimg.cn',
+        changeOrigin: true,
+        pathRewrite:{
+          '^/price': ''
+        }
+      }
+dev.env.js的merge里面:
+  NODE_ENV: '"development"',
+  ocr:'"/ocr/"',
+  upload: '"/price/"'
+prod.env.js,module_export里面;
+  NODE_ENV: '"production"',
+  ocr:'"//stock.gtimg.cn/"',
+  upload: '"//stock.gtimg.cn/"'
