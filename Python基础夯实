@@ -1,0 +1,4 @@
+基础数据类型  List, Tuple, Dict和set
+Tuple占据内存稍微小一点，不可更改，所以在大数据处理中比list更"经济"，但除此之外，功能上和List非常接近
+Dict就是key，values pair，key不可重复且case-sensitive，冲天里的websocket利用了这一特性
+Set是一系列无序的，不重复的元素，可以把set看作Dict的keys集合，故而可知Dict也是无序的
