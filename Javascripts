@@ -34,6 +34,8 @@ let person = new Object() ----------- 定义Object
 时间机制：
 
 new Date("2015-04-12")
+new Date()本身就可以返还当前时间，
+getTime()返还的是毫秒，就是/1000才能得到秒，以此类推
 
 for(let v of holdings) {                使用这个遍历比较方便
             console.log(v);
