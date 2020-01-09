@@ -25,6 +25,11 @@ sticky是一个相对scroll存在的概念，譬如说某元素是sticky并top:1
 
 
 Pseudo Class
+特指::before和::after，需要有content才能display
+content插入如同其名，是在内容前后插入，不是在元素前后
+这俩对img没用
+
+
 :focus正在输入时
 :first-child
 :nth-child(even)
