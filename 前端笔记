@@ -41,4 +41,4 @@ ctrl+F5,强制刷他妈的
 
 运用mark_safe(json.dumps)这一套会将parameters彻底转化为json格式，即不能在html里调用，这点需注意
 
-
+chat页面里加载图片时，因为渲染线程问题，本座使用了setTimeOut来滚动到底部，能解决大多数问题，不过偶尔还是有小bug（网速相关把可能），日后可以再完善
