@@ -1,0 +1,11 @@
+* 对computer来说，数学复杂度并不意味着更多耗时(可能与电路的设计有关)，加减乘除甚至次方的操作对电脑来说耗时相当
+  而运算次数，是耗时的主要指标，运算1百万次加法，耗时可能是运算一次乘法的百万倍
+  ------ 电路层面上，一切运算电路是已经铺好的，乘除无非是同时多用几个二极管，加减则是一两个二极管反复通电断电，耗时自然更长
+  所有operation即运算符(+-*/)，assignment,comparasion(<>==)，都算operation   所有big O的定义来了
+  O(f(n)) --- if the number of simple calculations the computer has to do is eventually less than a constant, as n increases
+  所以乘除加法算总和是O(1),一个一个加算总和是O(n)      相当于Y轴是运算时间，X轴是n的数值，画图并求出函数关系f(n)    
+  * 嵌套循环耗时O(n的次方)，所以追求耗时少，尽量少写嵌套循环
+  所以O(3n)和O(n)是一回事，constant doesn't matter when n is extremely huge
+  所以O(n平方+5n-100464)和O(n平方)是一回事，small term does not matter
+  ------- 最后space complexity和time complexity基本是鱼和熊掌，对码农来说，追求time performance
+  
