@@ -9,3 +9,22 @@
   所以O(n平方+5n-100464)和O(n平方)是一回事，small term does not matter
   ------- 最后space complexity和time complexity基本是鱼和熊掌，对码农来说，追求time performance
   
+* 所以relational database还是很重要的，分表本身是杜绝了redundancy的，例如如果不分表，SELECT city FROM cities WHERE province='GuangDong'，
+  relational的分表早就把广东标记好了ID，查找时相当于加上了辅助的index，很方便，如果是总表的话，还要手动加index，可读性也很垃圾
+  但需要注意的是，SELECT语句确实快了很多，但UPDATE,WRITE,DELETE都会由于index的存在变得更慢(index本身占据空间，读写更新时有很多if要跑，甚至index
+  本身都可能会被change，譬如province改成了湖南)
+  
+* Django ORM Tips
+  1，多个条件时，尽量写一个括号里面，譬如objects.filter(province=GuangDong).filter(city=Shenzhen)就不如写.filter(province=Guan.., city=SZ)
+  2，如果确认需要目标objects的relationship，一次性把queryset = Person.objects.all().select_related('father')打出来，Django会自动cache，否则
+     后续每call一次都要hit the database
+  3，尽量避免loop调取(每一此iteration都会touch database一次)
+  4，尽可能的把任务丢给database而不是python，举例，qs=person.objects.all(),if person.age>18....就不如直接Person.objects.filter(age__gte=18)
+     ---- 衍生，update时大量使用F：  Person.objects.update(age=F('age') + 1)
+     ---- 衍生，极值时使用Aggregation：  max_age = Person.objects.all().aggregate(Max('age'))['age__max']
+  5，只需要一个field时，用only：  queryset = Person.objects.only('name')
+  6，清点时使用count或者exist：  count = Person.objects.count()    exists = Person.objects.exists()
+  7，批量删改时用delete和update：  Person.objects.all().delete()   Person.objects.update(age=0)
+  8，批量创建时用bulk操作：  Person.objects.bulk_create(包含着批量objects的list) //每个object用.append()添加 
+     -------   fields添加时亦复如是：  person.jobs.add(job1, job2, job3)
+  9，foreign key已经cache了，直接拿，即不需要father_id = Person.objects.get(id=1).！father.id！，直接！father_id！就可以拿
