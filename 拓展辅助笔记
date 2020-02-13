@@ -28,3 +28,7 @@
   8，批量创建时用bulk操作：  Person.objects.bulk_create(包含着批量objects的list) //每个object用.append()添加 
      -------   fields添加时亦复如是：  person.jobs.add(job1, job2, job3)
   9，foreign key已经cache了，直接拿，即不需要father_id = Person.objects.get(id=1).！father.id！，直接！father_id！就可以拿
+  
+ 10，可能时最重要的一个，手机端基本上不需要objects，只需要value的情况下，大量使用value()   // valuelist就不用了，返还的时tuple，why do I need?
+     Blog.objects.values('entry__authors', entries=Count('entry')) ==>>  //还可以做点类似Count的小骚操作
+                          <QuerySet [{'entry__authors': 1, 'entries': 20}, {'entry__authors': 1, 'entries': 13}]> 
