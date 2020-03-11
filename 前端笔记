@@ -1,5 +1,7 @@
 实战tips：
 
+* Javascripts动态改style的时候，注意最好是绑定更改class，因为更改style会全盘重写Dom中的相关style，导致原生带来的css属性失效
+
 在Axios中不能直接调用this，需要先设一个var foo = this，后续所有this都用foo来指代（可能是axios协议的问题）
 
 this调用父类时，可能会因为嵌套层次太深而出现调用不清的情况（譬如{}镶套太深了，其实调用的是祖父类，却使用了this），这种情况需要明确祖父类，即var foo=this
