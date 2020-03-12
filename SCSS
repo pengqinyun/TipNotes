@@ -32,3 +32,9 @@ follow convention，如果要使用partial引入别的SCSS，最好命名_foo.sc
 CSS最新写法：
 ----- &:focus可以直接继承button
 ----- calc($size - 40px) 注意space很重要
+
+* 不同屏幕的适应策略:
+  @mixin phone { @media only screen and (max-width:480px){ @content } }     // 整体定义
+  .foo{...} 定义完后当场定义 @include phone { { .foo{width:100%} } }        // 零敲碎打
+  这样写的时候很方便，尽管看着很散乱，但compile之后所有的@media only会放一起，最后的css其实很organized
+  ---- 但要注意variables的定义，minxin可以直接传default值，但优先级不如global的，具体compile也很复杂所以不要在mixin的scope里定义variable
