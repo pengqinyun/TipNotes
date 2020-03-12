@@ -48,3 +48,9 @@ for(let v of holdings) {                使用这个遍历比较方便
 forEach的可能用法：
 前端getElementsByClassName会return一个object，遍历该object可以用forEach
 但注意forEach一般是对list，所以要切换一下，[].forEach.call(class_list,(v)=>{v.style.color = '#FF0000'})
+
+
+定时器：
+
+* setInterval在Vue components的使用中要注意手动销毁，不然会在内存中一直跑，不过在页面里基本不用刻意销毁，因为定时器是Dom页面元素，页面关闭时会一起
+  销毁，所以除非在页面关闭前需要销毁，否则不用特别留意
