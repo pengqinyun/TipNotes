@@ -145,12 +145,14 @@ Grid高阶
 Flex Box:
 
 -------把父系元素定义成 display：flex, 则父系内所有元素呈直线排列
--------每个子元素可以用 flex:3 来调节, CSS会自动按比例在每一个父元素里分配
+-------每个子元素可以用 flex:3 来调节, CSS会自动按比例在每一个父元素里分配,换言之所有子元素都是flex:1会平分父元素宽度
 ------- order:2 还可以assign不同的顺序
 ------- align-items: flex-start/-end/center 可竖直调节在父元素中的位置
 ------- flex-direction:column 可让子元素数值排列
 ------- width:20% 这个和CSS一样，按父系切20%给它,按照convention来说应该用flex-basis
 ------- justify-content: flex-start/-end/center/space-between(no margin on the side)/space-around
+
+------- 最后，flex不善于处理responsive布局，如果要做大布局的responsive调整，还是首先考虑grid，在单个div里做排版调整且不考虑responsive时用flex
 
 
 Transition & Animation
