@@ -154,6 +154,10 @@ Flex Box:
 
 ------- 最后，flex不善于处理responsive布局，如果要做大布局的responsive调整，还是首先考虑grid，在单个div里做排版调整且不考虑responsive时用flex
 
+* box-sizing: border-box
+  默认的CSS布局div的长度会随着规定的长度出现各种不可控情况(规定为100px但border是5px的话就会多5px)，这是因为默认的是向外调整，而加上这一行之后，
+  就变成向内调整了(基本我们需要的所有的调整都是向内的，所有这一行很有用)
+
 
 Transition & Animation
 
