@@ -198,5 +198,8 @@ list化，加上[]封装，变成一个user object的list representation
 
 
 
+* 关于M2M： 
+  manyTomany relationship一定要非常重视！我几次database弄崩都是因为这个屌东西！
+  Rule#1：使用through和第三方辅助模型完成M2M，以便日后拓展！(主要是日后可能在M2M关系中夹带字段)
 
 
