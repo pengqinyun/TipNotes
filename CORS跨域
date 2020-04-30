@@ -1,0 +1,10 @@
+没想到这个问题这么麻烦
+
+* django-cors-headers这个插件我装了，不过它更多的应用是自身server的返还，其实装了RESTAPI基本用不上，如果去请求新浪的端口，for一个xample，返还的header
+  是新浪决定的，而且Ajax中不能直接设定headers(不然白搞CORS嘛)，所以这个其实是白费功夫
+
+* 最终的解决办法还是靠jsonP和script，本座现在的猜测是这样的，CORS杜绝的攻击情况是，携带用户的COOKIE和SESSION从而非法登录或者获取第三方网站信息，但不携
+  带cookie的情况下是可以对公共接口做请求的(例如新浪的接口)，所以datatype设成jsonP，不去传递COOKIE等信息，就没问题。script也是一个道理，相当于新建一个
+  script标签，然后在标签里src去连接
+
+*
