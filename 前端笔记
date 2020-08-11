@@ -2,45 +2,21 @@
 
 * Javascripts动态改style的时候，注意最好是绑定更改class，因为更改style会全盘重写Dom中的相关style，导致原生带来的css属性失效
 
-在Axios中不能直接调用this，需要先设一个var foo = this，后续所有this都用foo来指代（可能是axios协议的问题）
+* 在Axios中不能直接调用this，需要先设一个var foo = this，后续所有this都用foo来指代（可能是axios协议的问题）
 
-this调用父类时，可能会因为嵌套层次太深而出现调用不清的情况（譬如{}镶套太深了，其实调用的是祖父类，却使用了this），这种情况需要明确祖父类，即var foo=this
+* this调用父类时，可能会因为嵌套层次太深而出现调用不清的情况（譬如{}镶套太深了，其实调用的是祖父类，却使用了this），这种情况需要明确祖父类，即var foo=this
 
-v-model="foo[3].attr"这样写是完全可以的，但一定要保证return存在，否则javascript报错
+* v-model="foo[3].attr"这样写是完全可以的，但一定要保证return存在，否则javascript报错
 
-Django template也可以display各种form errors，假设使用了{{ form.as_p }}
-{{ form.non_field_errors }}可以显示non_field
-<ul class="errorlist nonfield">
-    <li>Generic validation error</li>
-</ul>
-前端显示会额外赋予nonfield class来做处理，但其实都是error，没那么必要
+* 关于ICONS：
+  设计的icon以unicode形式引用没有问题，但是每次新增时很麻烦，所以后续的icons都统一用阿里云矢量图在线项目好了，记得是以微博登录的
 
-{{ form.name_of_field.errors }} 可以具体显示某个field的error
-具体显示时，会以如下形式：
-<ul class="errorlist">
-    <li>Sender is required.</li>
-</ul>
-所以可以改errorlist的CSS来改前端
+* 关于CSS缓存： ctrl+F5,强制刷他妈的
 
-资讯可以做成button，看起来还不错
+* 使用了Axios的地方注意一定要有前缀http://,不然header不知道什么协议，后续转https时要更改
 
-websocket归websocket，用ajax可读性更强，Vue归Vue，不要和websocket混用（容易看不懂）
+* chat页面里加载图片时，因为渲染线程问题，本座使用了setTimeOut来滚动到底部，能解决大多数问题，不过偶尔还是有小bug（网速相关把可能），日后可以再完善
 
-关于Forms：
-使用Django自带的forms主要是为了他自带的validation，其实前端输出很多涉及到style，input type等信息，全在forms里define可读性简直了，完全可以前端自己写，
-把name甚至id（其实不是很必要）看准了就行，这样可读性也好很多
-
-关于ICONS：
-设计的icon以unicode形式引用没有问题，但是每次新增时很麻烦，所以后续的icons都统一用阿里云矢量图在线项目好了，记得是以微博登录的
-
-关于CSS缓存：
-ctrl+F5,强制刷他妈的
-
-使用了Axios的地方：
-----3级联动菜单
-----清空通知，清空好友消息通知
-注意一定要有前缀http://,不然header不知道什么协议，后续转https时要更改
-
-运用mark_safe(json.dumps)这一套会将parameters彻底转化为json格式，即不能在html里调用，这点需注意
-
-chat页面里加载图片时，因为渲染线程问题，本座使用了setTimeOut来滚动到底部，能解决大多数问题，不过偶尔还是有小bug（网速相关把可能），日后可以再完善
+* 用computed返还vueX中数据时，因为异步加载问题，第一次很可能出现返还null的情况
+  这其实是一个好机制，强迫使用者考虑null的情况，一个解决办法是再设立一个computed同步该computed并视情况返还true/false，然后用v-if进行渲染
+  这样没有值的时候v-if能返还一个默认页面
