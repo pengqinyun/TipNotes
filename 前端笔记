@@ -20,3 +20,5 @@
 * 用computed返还vueX中数据时，因为异步加载问题，第一次很可能出现返还null的情况
   这其实是一个好机制，强迫使用者考虑null的情况，一个解决办法是再设立一个computed同步该computed并视情况返还true/false，然后用v-if进行渲染
   这样没有值的时候v-if能返还一个默认页面
+
+* 用watch涉及vueX的computed的时候，全用handler+immediate:true，不然同页面切换账号时，会发生很多奇怪的运行结果
