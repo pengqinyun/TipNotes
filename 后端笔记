@@ -1,60 +1,41 @@
-* 关于timezone:
-  本座直接使用了django的timezone，即“按照用户所在时区返还用户当下的日期和时间”，这对于处理世界市场来说是django已经造好的轮子，不需要再担心白农们调夏
-  令时冬令时，但同时可能带来的安全问题，后期要注意
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+filter返还的是一个queryset，因为可能有好几个符合条件的对象，如果要精确定位某一个对象，用get_object_or_404
+
+pandas本是一个处理大数据的插件，有各种matrices方法可以调用，但素！因为django自带的Json解码在应对中文编码时简直是一坨屎，所以本座还是捏着鼻子用了pandas，
+至于xlrd还不错，可以直接用.原始录入的院校，省市信息，本座都存到了“冲天流程”这个文件夹中
+
+搜索框相关:
+
+F(stocks.price)指代旧的price，用于进行一些操作，譬如stocks.price=F(stocks.price)+2
+
+Q()是指封装某个query，以便后续进行逻辑组合，譬如 Q(..) | ~Q(..),其中~表示not
+Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6)), question__startswith='Who')， Q（）可以传递更具体的参数，但要注意放到最前
+
+AsyncIO:
+单线程编程只能运用CPU算力的10%左右，要释放应用更多算力，async是解决办法
 
 
-* 关于slug：
-  思考再三，还是需要slug，用以显示个人页面（或者说用以以某一个账号访问别的账号的个人页面），但考虑到username可能是中文，所以下了uuslug插件，之后再进
-  行请求时，务必记得先slugify(username)
-  使用slug的主要考虑是，
-  1,url中参数的传递和显示，很多时候需要浏览器的参与，当中文用户被英文浏览器搜索的时候，会有很多衍生问题，所以干脆一劳永逸了
-  2,url中传递的只能是string，不能是object，所以反正要在views里convert的，不如直接统一用slug，后续如果有直接读写该页面的需求也更好做
-  3，很多外接语言，端口的调用，通常的汉字虽然也能传递，但涉及到一些偏僻字符时，就可能会报错了
+Django channel的consumer中使用了如下代码：
+-------------------------------------------------------------------------------
+    try:
+        PrivateConsumer.members[self.group_name].add(self.socket)      
+    except:                                                             
+        PrivateConsumer.members[self.group_name] = set([self.socket])   
+---------------------------------------------------------------------------------
+这个代码有意思在，它规避了所有的报错，来试着分析一下
+members是该consumer class里自定义的literable dict，字典格式。如果该键位上（members[self.group_name]）为空的话，add方法失效，所以第一次新建走
+except逻辑，在该键位上新建set([self.socket])，其中self.socket是一个user object，然而set()函数只接受iliterable variable，所以要把user object
+list化，加上[]封装，变成一个user object的list representation
+后续的add里面，会自动把object转化成list representation，所有不必操心这一点。当该group_name键位上不为空时，add方法生效，检验该键位是否有同样的value
+如果有，则什么都不做，如果没有，则在该键位上加上新value
+总体来说，这是一个很高效简洁的设计
 
 
-* 关于日期：
-  再holdings和money关系中都涉及到对日期的判断，所以本座自制了两个相关的property，前端templates中直接调用就好了
-  datetime有很多种操作，譬如datetime.date.today()，datetime.year，本座用了datetime.datetime.now()和datetime.timedelta（hours=），注意import时
-  候直接import datetime就好
+
+* 关于M2M： 
+  manyTomany relationship一定要非常重视！我几次database弄崩都是因为这个屌东西！
+  Rule#1：使用through和第三方辅助模型完成M2M，以便日后拓展！(主要是日后可能在M2M关系中夹带字段)
 
 
-* 关于form：
-  一般的form直接写到forms.py就好了，这样django会自动加上cleaned_data方法，整个app也更organized，当然硬要在视图里强敲也不是不行
-
-
-* 关于订阅subscribe:
-  有订阅功能的个人页面在subscribe里面，本座设置了login_required，如果是给未登录用户看的个人页面，后期写在users里面算了，subscribe处理订阅逻辑，
-  users处理浏览逻辑
-
-
-* friendship插件：
-  因为该package有request, reject等功能，所以“谁加了谁”当好友还有一个审批的过程，所以add的时候有两个方向，都要注意
-
-
-* Django-channel和chat系统：
-
-  一开始的困惑在于asgiref，需要更新到最新版本，后续部署时这一点可能需要注意
-  传输过程中基本上在用各种JSON，前端用了JSON.parse（收）和JSON.stringify（发），后端用了json.loads（收）和json.dumps
-  这么做的原因在于，前后端传输的不只是text，还有username/roomname等信息，后续拓展时还可以加入各种别的信息，格式涉及到dict，以后还可能涉及到float，
-  int等等如此传输可以保障python和javascript之间数据的无缝转换
-
-  任何新的聊天线程（群组，私聊）都以group_add为发起，add的一方固定为该request.user（储存在socket的self.scope['user']里），另一方为群组或其他用户
-  然后主要的逻辑再group_send里面，第一个parameter是send的对象，私聊的就send私聊，群聊的就send群聊
-
-  notification系统也有group_send，不光贪简单，用户在不同的设备登录时，都可以收到notification
-
-  买卖过程中需要创建相关的notification并向所有粉丝广播该notification，比较有意思的是广播环节一定要hardcode，主要是timestamp不好处理，因为model中
-  timestamp是伴随着save方法自动生成的，如果再导出来，其实就为了dry而dry了，还增加了数据库负担，所以这一步直接hardcode，没什么问题
-
-* 关于trade的逻辑：
-  使用Forms一般伴随着input，也就是需要用户输入一些信息，那么利用上Django自带的过滤系统，即便捷也安全。
-  然而针对买卖情况，用户并不需要输入任何信息，传输的关键参数在url里面，因此参数取值时做好安全措施即可，后续的判断逻辑写的周全一些，能保万无一失，强行
-  使用forms，还必须刷新页面，牺牲了宝贵的用户体验，因此还是决定，诸如此类操作，皆用Ajax完成
-
-* 收益的计算：
-  hisHold里面的earnning只是展示作用，所以直接用2位数，打到前端加%即可。
-  具体的收益在user_profile的day里面，以1为基本单位，部署后后端一段时间内叠加运算即可，这是两套分开的系统
-  
-* REST-API：
-  以注册页面的三级联动为例，REST搭建了一个自己的router系统(类似urls)，那前端要access这个系统时，仍然要通过urls来实现，所以urls+views这种传统逻辑是
-  要的，除此之外还要明确的在urls规定router逻辑(其实注册一下就好了)，这也是为什么三级都要注册router的原因 
