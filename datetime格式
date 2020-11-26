@@ -1,0 +1,15 @@
+* datetime.date(2019,7,12).day/.year/.weekday/.isoweekday   注意不要给07，weekday周一是0，iso周一是1
+
+* datetime.timedelta(days=7)/(hours=9).days/.total_seconds()   注意total_seconds是一个方法
+
+* datetime对象可以加减timedelta，  datetime对象加减datetime对象可以获得timedelta对象
+
+* datetime.time(9, 30, 45, 100000).hour
+
+* datetime.datetime(2019,7,12, 9, 30, 45, 100000)   啥都有的意思
+
+* datetime.datetime.today() 返还native时间   datetime.datetime.now() 返还time-zone时间
+
+* .strftime('%B %d, %Y') ----- 在python官网里面可以调整，时间的输出格式
+
+* .strptime('July 8, 2016', '%B %d, %Y') 把string转化成datetime对象
